@@ -13,386 +13,205 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "basePath": "/v1",
+    "basePath": "/api",
     "paths": {
-        "/object/": {
-            "get": {
+        "/v2/etcdv2/delete": {
+            "delete": {
                 "tags": [
-                    "object"
+                    "v2"
                 ],
-                "description": "get all objects",
-                "operationId": "ObjectController.GetAll",
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.Object"
-                        }
-                    },
-                    "403": {
-                        "description": ":objectId is empty"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "object"
-                ],
-                "description": "create object",
-                "operationId": "ObjectController.Create",
+                "description": "etcdv2 修改设置",
+                "operationId": "EtcdV2Controller.Delete",
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "body",
-                        "description": "The object content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Object"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} models.Object.Id"
-                    },
-                    "403": {
-                        "description": "body is empty"
-                    }
-                }
-            }
-        },
-        "/object/{objectId}": {
-            "get": {
-                "tags": [
-                    "object"
-                ],
-                "description": "find object by objectid",
-                "operationId": "ObjectController.Get",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "objectId",
+                        "name": "key",
                         "description": "the objectid you want to get",
                         "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Object"
-                        }
-                    },
-                    "403": {
-                        "description": ":objectId is empty"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "object"
-                ],
-                "description": "update the object",
-                "operationId": "ObjectController.Update",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "objectId",
-                        "description": "The objectid you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "The body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Object"
+                            "$ref": "#/definitions/models.Key"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.Object"
-                        }
+                        "description": "{string} success"
                     },
                     "403": {
-                        "description": ":objectId is empty"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "object"
-                ],
-                "description": "delete the object",
-                "operationId": "ObjectController.Delete",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "objectId",
-                        "description": "The objectId you want to delete",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} delete success!"
-                    },
-                    "403": {
-                        "description": "objectId is empty"
+                        "description": ":key is empty"
                     }
                 }
             }
         },
-        "/user/": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "description": "get all Users",
-                "operationId": "UserController.GetAll",
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.User"
-                        }
-                    }
-                }
-            },
+        "/v2/etcdv2/get": {
             "post": {
                 "tags": [
-                    "user"
+                    "v2"
                 ],
-                "description": "create users",
-                "operationId": "UserController.CreateUser",
+                "description": "etcdv2 查询",
+                "operationId": "EtcdV2Controller.Get",
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "body",
-                        "description": "body for user content",
+                        "name": "key",
+                        "description": "the objectid you want to get",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "$ref": "#/definitions/models.Key"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "{int} models.User.Id"
+                        "description": "{string} success"
                     },
                     "403": {
-                        "description": "body is empty"
+                        "description": ":key is empty"
                     }
                 }
             }
         },
-        "/user/login": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "description": "Logs user into the system",
-                "operationId": "UserController.Login",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "username",
-                        "description": "The username for login",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "password",
-                        "description": "The password for login",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} login success"
-                    },
-                    "403": {
-                        "description": "user not exist"
-                    }
-                }
-            }
-        },
-        "/user/logout": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "description": "Logs out current logged in user session",
-                "operationId": "UserController.logout",
-                "responses": {
-                    "200": {
-                        "description": "{string} logout success"
-                    }
-                }
-            }
-        },
-        "/user/{uid}": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "description": "get user by uid",
-                "operationId": "UserController.Get",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "uid",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.User"
-                        }
-                    },
-                    "403": {
-                        "description": ":uid is empty"
-                    }
-                }
-            },
+        "/v2/etcdv2/set": {
             "put": {
                 "tags": [
-                    "user"
+                    "v2"
                 ],
-                "description": "update the user",
-                "operationId": "UserController.Update",
+                "description": "etcdv2 修改设置",
+                "operationId": "EtcdV2Controller.Set",
                 "parameters": [
-                    {
-                        "in": "path",
-                        "name": "uid",
-                        "description": "The uid you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
                     {
                         "in": "body",
-                        "name": "body",
-                        "description": "body for user content",
+                        "name": "key",
+                        "description": "the objectid you want to get",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "$ref": "#/definitions/models.Value"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.User"
-                        }
+                        "description": "{string} success"
                     },
                     "403": {
-                        "description": ":uid is not int"
+                        "description": ":key is empty"
                     }
                 }
-            },
+            }
+        },
+        "/v3/etcdv3/delete": {
             "delete": {
                 "tags": [
-                    "user"
+                    "v3"
                 ],
-                "description": "delete the user",
-                "operationId": "UserController.Delete",
+                "description": "etcdV3 修改设置",
+                "operationId": "EtcdV3Controller.Delete",
                 "parameters": [
                     {
-                        "in": "path",
-                        "name": "uid",
-                        "description": "The uid you want to delete",
+                        "in": "body",
+                        "name": "key",
+                        "description": "the objectid you want to get",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "$ref": "#/definitions/models.Key"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "{string} delete success!"
+                        "description": "{string} success"
                     },
                     "403": {
-                        "description": "uid is empty"
+                        "description": ":key is empty"
+                    }
+                }
+            }
+        },
+        "/v3/etcdv3/get": {
+            "post": {
+                "tags": [
+                    "v3"
+                ],
+                "description": "etcdV3 查询",
+                "operationId": "EtcdV3Controller.Get",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "key",
+                        "description": "the objectid you want to get",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Key"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} success"
+                    },
+                    "403": {
+                        "description": ":key is empty"
+                    }
+                }
+            }
+        },
+        "/v3/etcdv3/set": {
+            "put": {
+                "tags": [
+                    "v3"
+                ],
+                "description": "etcdV3 修改设置",
+                "operationId": "EtcdV3Controller.Set",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "key",
+                        "description": "the objectid you want to get",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Value"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} success"
+                    },
+                    "403": {
+                        "description": ":key is empty"
                     }
                 }
             }
         }
     },
     "definitions": {
-        "models.Object": {
-            "title": "Object",
+        "models.Key": {
+            "title": "Key",
             "type": "object",
             "properties": {
-                "ObjectId": {
+                "key": {
                     "type": "string"
                 },
-                "PlayerName": {
-                    "type": "string"
-                },
-                "Score": {
-                    "type": "integer",
-                    "format": "int64"
+                "recursive": {
+                    "type": "boolean"
                 }
             }
         },
-        "models.Profile": {
-            "title": "Profile",
+        "models.Value": {
+            "title": "Value",
             "type": "object",
             "properties": {
-                "Address": {
+                "key": {
                     "type": "string"
                 },
-                "Age": {
+                "ttl": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "Email": {
-                    "type": "string"
-                },
-                "Gender": {
-                    "type": "string"
-                }
-            }
-        },
-        "models.User": {
-            "title": "User",
-            "type": "object",
-            "properties": {
-                "Id": {
-                    "type": "string"
-                },
-                "Password": {
-                    "type": "string"
-                },
-                "Profile": {
-                    "$ref": "#/definitions/models.Profile"
-                },
-                "Username": {
+                "value": {
                     "type": "string"
                 }
             }
         }
-    },
-    "tags": [
-        {
-            "name": "object",
-            "description": "Operations about object\n"
-        },
-        {
-            "name": "user",
-            "description": "Operations about Users\n"
-        }
-    ]
+    }
 }

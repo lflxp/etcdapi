@@ -3,6 +3,7 @@ package pkg
 import (
 	"github.com/astaxie/beego"
 	"github.com/etcd-io/etcd/client"
+	"github.com/lflxp/etcdapi/models"
 	"github.com/lflxp/etcdcli"
 )
 
@@ -17,27 +18,35 @@ func init() {
 	}
 }
 
-func Get(name string) (*client.Response, error) {
-	resp, err := Conn.GetV2(name)
+func Get(data models.Key) (*client.Response, error) {
+	var resp *client.Response
+	var err error
+	if data.Recursive == true {
+		resp, err = Conn.GetWithPreifxV2(data.Key)
+	} else {
+		resp, err = Conn.GetV2(data.Key)
+	}
 	return resp, err
 }
 
-func Set(k, v string) (*client.Response, error) {
-	resp, err := Conn.PutV2(k, v)
+func Set(value models.Value) (*client.Response, error) {
+	var resp *client.Response
+	var err error
+	if value.Ttl != 0 {
+		resp, err = Conn.PutV2(value.Key, value.Value)
+	} else {
+		resp, err = Conn.PutTtlV2(value.Key, value.Value, value.Ttl)
+	}
 	return resp, err
 }
 
-func SetTtl(k, v string, ttl int64) (*client.Response, error) {
-	resp, err := Conn.PutTtlV2(k, v, ttl)
-	return resp, err
-}
-
-func Delete(k string) (*client.Response, error) {
-	resp, err := Conn.DeleteV2(k)
-	return resp, err
-}
-
-func DeleteAll(k string) (*client.Response, error) {
-	resp, err := Conn.DeleteWithPrefixV2(k)
+func Delete(data models.Key) (*client.Response, error) {
+	var resp *client.Response
+	var err error
+	if data.Recursive == true {
+		resp, err = Conn.DeleteWithPrefixV2(data.Key)
+	} else {
+		resp, err = Conn.DeleteV2(data.Key)
+	}
 	return resp, err
 }

@@ -7,99 +7,51 @@ import (
 
 func init() {
 
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:ObjectController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:ObjectController"],
+	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV2Controller"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV2Controller"],
 		beego.ControllerComments{
-			Method: "Post",
-			Router: `/`,
-			AllowHTTPMethods: []string{"post"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:ObjectController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:ObjectController"],
-		beego.ControllerComments{
-			Method: "GetAll",
-			Router: `/`,
-			AllowHTTPMethods: []string{"get"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:ObjectController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:ObjectController"],
-		beego.ControllerComments{
-			Method: "Get",
-			Router: `/:objectId`,
-			AllowHTTPMethods: []string{"get"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:ObjectController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:ObjectController"],
-		beego.ControllerComments{
-			Method: "Put",
-			Router: `/:objectId`,
-			AllowHTTPMethods: []string{"put"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:ObjectController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:ObjectController"],
-		beego.ControllerComments{
-			Method: "Delete",
-			Router: `/:objectId`,
+			Method: "DeleteValueV2",
+			Router: `/etcdv2/delete`,
 			AllowHTTPMethods: []string{"delete"},
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"],
+	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV2Controller"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV2Controller"],
 		beego.ControllerComments{
-			Method: "Post",
-			Router: `/`,
+			Method: "GetValueV2",
+			Router: `/etcdv2/get`,
 			AllowHTTPMethods: []string{"post"},
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"],
+	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV2Controller"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV2Controller"],
 		beego.ControllerComments{
-			Method: "GetAll",
-			Router: `/`,
-			AllowHTTPMethods: []string{"get"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"],
-		beego.ControllerComments{
-			Method: "Get",
-			Router: `/:uid`,
-			AllowHTTPMethods: []string{"get"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"],
-		beego.ControllerComments{
-			Method: "Put",
-			Router: `/:uid`,
+			Method: "SetValueV2",
+			Router: `/etcdv2/set`,
 			AllowHTTPMethods: []string{"put"},
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"],
+	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV3Controller"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV3Controller"],
 		beego.ControllerComments{
-			Method: "Delete",
-			Router: `/:uid`,
+			Method: "DeleteValueV3",
+			Router: `/etcdv3/delete`,
 			AllowHTTPMethods: []string{"delete"},
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"],
+	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV3Controller"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV3Controller"],
 		beego.ControllerComments{
-			Method: "Login",
-			Router: `/login`,
-			AllowHTTPMethods: []string{"get"},
+			Method: "GetValueV3",
+			Router: `/etcdv3/get`,
+			AllowHTTPMethods: []string{"post"},
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:UserController"],
+	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV3Controller"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV3Controller"],
 		beego.ControllerComments{
-			Method: "Logout",
-			Router: `/logout`,
-			AllowHTTPMethods: []string{"get"},
+			Method: "SetValueV3",
+			Router: `/etcdv3/set`,
+			AllowHTTPMethods: []string{"put"},
 			MethodParams: param.Make(),
 			Params: nil})
 
