@@ -21,16 +21,20 @@ type EtcdV3Controller struct {
 func (this *EtcdV3Controller) GetValueV3() {
 	var key models.Key
 	json.Unmarshal(this.Ctx.Input.RequestBody, &key)
-	resp, err := pkg.GetV3(key)
-	if err != nil {
-		this.Data["json"] = map[string]interface{}{
-			"status": "failed",
-			"data":   err.Error(),
-		}
+	if key.Recursive == false && key.Key == "" {
+		this.Data["json"] = "单值查询 key is none"
 	} else {
-		this.Data["json"] = map[string]interface{}{
-			"status": "success",
-			"data":   resp,
+		resp, err := pkg.GetV3(key)
+		if err != nil {
+			this.Data["json"] = map[string]interface{}{
+				"status": "failed",
+				"data":   err.Error(),
+			}
+		} else {
+			this.Data["json"] = map[string]interface{}{
+				"status": "success",
+				"data":   resp,
+			}
 		}
 	}
 
