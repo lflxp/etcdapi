@@ -19,11 +19,13 @@ func init() {
 			beego.NSInclude(
 				&controllers.EtcdV2Controller{},
 			),
+			beego.NSRouter("/*", &controllers.BaseController{}, "options:Options"),
 		),
 		beego.NSNamespace("/v3",
 			beego.NSInclude(
 				&controllers.EtcdV3Controller{},
 			),
+			beego.NSRouter("/*", &controllers.BaseController{}, "options:Options"),
 		),
 	)
 	beego.AddNamespace(ns)
