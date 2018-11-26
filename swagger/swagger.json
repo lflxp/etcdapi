@@ -99,6 +99,34 @@
                 }
             }
         },
+        "/v2/etcdv2/setdir": {
+            "put": {
+                "tags": [
+                    "v2"
+                ],
+                "description": "etcdv2 修改设置",
+                "operationId": "EtcdV2Controller.Set",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "key",
+                        "description": "the objectid you want to get",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Value"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} success"
+                    },
+                    "403": {
+                        "description": ":key is empty"
+                    }
+                }
+            }
+        },
         "/v3/etcdv3/delete": {
             "delete": {
                 "tags": [

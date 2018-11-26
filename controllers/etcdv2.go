@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/astaxie/beego"
+
 	"github.com/lflxp/etcdapi/models"
 	"github.com/lflxp/etcdapi/pkg"
 )
@@ -79,11 +81,12 @@ func (this *EtcdV2Controller) SetValueV2() {
 // @Param	key		body 	models.Value	true		"the objectid you want to get"
 // @Success 200 {string} success
 // @Failure 403 :key is empty
-// @router /etcdv2/set [put]
+// @router /etcdv2/setdir [put]
 func (this *EtcdV2Controller) SetValueDirV2() {
 	var key models.Value
 	json.Unmarshal(this.Ctx.Input.RequestBody, &key)
-	if key.Key != "" && key.Value != "" {
+	beego.Critical("11111111111", key)
+	if key.Key != "" {
 		resp, err := pkg.SetDir(key)
 		if err != nil {
 			this.Data["json"] = map[string]interface{}{
