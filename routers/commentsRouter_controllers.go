@@ -31,6 +31,14 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
+	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV2Controller"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV2Controller"],
+		beego.ControllerComments{
+			Method: "SetValueDirV2",
+			Router: `/etcdv2/set`,
+			AllowHTTPMethods: []string{"put"},
+			MethodParams: param.Make(),
+			Params: nil})
+
 	beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV3Controller"] = append(beego.GlobalControllerRouter["github.com/lflxp/etcdapi/controllers:EtcdV3Controller"],
 		beego.ControllerComments{
 			Method: "DeleteValueV3",

@@ -40,6 +40,13 @@ func Set(value models.Value) (*client.Response, error) {
 	return resp, err
 }
 
+func SetDir(value models.Value) (*client.Response, error) {
+	var resp *client.Response
+	var err error
+	resp, err = Conn.SetDir(value.Key)
+	return resp, err
+}
+
 func Delete(data models.Key) (*client.Response, error) {
 	var resp *client.Response
 	var err error
